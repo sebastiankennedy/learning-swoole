@@ -8,10 +8,9 @@ $server = new Swoole\Server(HOST, PORT);
 // 服务端配置
 $server->set([
     'worker_num' => 1,
+    'open_eof_check' => true,
+    'package_eof' => '\r\n',
 ]);
-
-// 约定结束符
-$string = '\r\n';
 
 // 监听连接
 $server->on('connect', function ($server, $fd) {
@@ -19,10 +18,8 @@ $server->on('connect', function ($server, $fd) {
 });
 
 // 监听数据接收
-$server->on('receive', function ($server, $fd, $reactorId, $data) use ($string) {
-    $data = explode($string, $data);
-    // Client 10 次发送少量数据，Server 多次接收，Client 1 次发送大量数据，Server 多次接收
-    var_dump(array_filter($data));
+$server->on('receive', function ($server, $fd, $reactorId, $data) {
+    var_dump($data);
 });
 
 // 监听连接断开
