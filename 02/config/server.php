@@ -8,8 +8,12 @@ $server = new Swoole\Server(HOST, PORT);
 // 服务端配置
 $server->set([
     'worker_num' => 1,
+    // 打开 EOF 检测
     'open_eof_check' => true,
-    'package_eof' => '\r\n',
+    // 启用 EOF 自动分包
+    'open_eof_split' => true,
+    // 设置 EOF 字符串
+    'package_eof' => CUSTOM_EOF,
 ]);
 
 // 监听连接
@@ -19,7 +23,7 @@ $server->on('connect', function ($server, $fd) {
 
 // 监听数据接收
 $server->on('receive', function ($server, $fd, $reactorId, $data) {
-    var_dump($data);
+    var_dump(str_replace(CUSTOM_EOF, '', $data));
 });
 
 // 监听连接断开
