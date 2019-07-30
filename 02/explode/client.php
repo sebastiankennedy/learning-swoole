@@ -11,13 +11,14 @@ $client->connect(IP_ADDRESS, PORT);
 // 约定结束符
 $string = '\r\n';
 
-// 一次性发送多条数据
-for ($i = 0; $i < 10; $i++) {
+// 一次性发送多条数据 - 模拟粘包
+for ($i = 0; $i < 20; $i++) {
+    $client->send('654321');
+}
+
+// 使用结束符一次性发送多条数据 - 约定结束符分割粘包
+for ($i = 0; $i < 20; $i++) {
     $client->send('123456' . $string);
 }
 
-sleep(3);
-
-// 一次性发送大量数据
-$data = str_repeat('A', 12 * 1024);
-$client->send(json_encode($data));
+$client->close();

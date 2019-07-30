@@ -20,9 +20,13 @@ $server->on('connect', function ($server, $fd) {
 
 // 监听数据接收
 $server->on('receive', function ($server, $fd, $reactorId, $data) use ($string) {
-    $data = explode($string, $data);
+    static $count = 1;
+    echo '---------------' . $count . '---------------' . PHP_EOL;
     // Client 10 次发送少量数据，Server 多次接收，Client 1 次发送大量数据，Server 多次接收
+    $data = explode($string, $data);
     var_dump(array_filter($data));
+    echo '---------------' . $count . '---------------' . PHP_EOL;
+    $count++;
 });
 
 // 监听连接断开
