@@ -12,7 +12,8 @@ $client->on('connect', function ($client) {
 
 // 监听接收事件
 $client->on('receive', function ($client, $data) {
-    echo "Received: {$data} \n";
+    echo $data . PHP_EOL;
+    $client->close();
 });
 
 // 监听错误事件
@@ -27,3 +28,6 @@ $client->on('close', function ($client) {
 
 $client->connect(IP_ADDRESS, PORT)
 || exit("connect failed. Error: {$client->errCode}");
+
+echo "Hello World" . PHP_EOL;
+echo "IO 非阻塞" . PHP_EOL;

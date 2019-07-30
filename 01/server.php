@@ -1,4 +1,5 @@
 <?php
+
 require '../config.php';
 
 // 创建 Server 实例，监听 0.0.0.0:9190 端口
@@ -11,7 +12,8 @@ $server->on('connect', function ($server, $fd) {
 
 // 监听数据接收事件
 $server->on('receive', function ($server, $fd, $fromId, $data) {
-    $server->send($fd, "回声：" . $data . PHP_EOL);
+    sleep(3);
+    $server->send($fd, "服务端回声：" . $data . PHP_EOL);
 });
 
 // 监听关闭事件

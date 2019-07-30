@@ -11,8 +11,10 @@ $client->connect(IP_ADDRESS, PORT)
 
 // 向服务端发送数据
 $client->send("Hello World");
+echo "客户端发送：Hello World" . PHP_EOL;
 
 // 从服务端接收数据
+sleep(5);
 $response = $client->recv();
 
 // 输出数据
