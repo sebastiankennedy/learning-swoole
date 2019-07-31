@@ -15,6 +15,8 @@ $client->set([
     // 包体从第几个字节开始计算
     'package_body_offset' => 4,
     'package_max_length' => 1024 * 1024 * 3,
+    // IO 缓冲区的大小
+    'buffer_output_size' => 1024 * 1024 * 6,
 ]);
 
 // 发送连接请求

@@ -15,8 +15,8 @@ $server->set([
     // 包体从第几个字节开始计算
     'package_body_offset' => 4,
     'package_max_length' => 1024 * 1024 * 3,
-    // 输出缓冲区的大小
-    'buffer_output_size' => 1024 * 1024 * 3,
+    // IO 缓冲区的大小
+    'buffer_output_size' => 1024 * 1024 * 6,
 ]);
 
 // 监听连接事件
@@ -27,9 +27,11 @@ $server->on('connect', function ($server, $fd) {
 // 监听数据接收事件
 $server->on('receive', function ($server, $fd, $fromId, $data) {
     // 解包
-    $data = unpack('N', $data);
+    $length = unpack('N', $data);
     // 包的长度
-    var_dump($data);
+    var_dump($length);
+    // 包的内容
+    var_dump(substr($data, 4));
 });
 
 // 监听关闭事件
