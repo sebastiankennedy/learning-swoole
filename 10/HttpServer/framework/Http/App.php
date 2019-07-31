@@ -90,7 +90,7 @@ class App
             $md5 = $this->getMd5();
             var_dump('Event: reload, md5 value is ' . $md5);
             if ($md5 != $this->md5File) {
-                // 重启服务端
+                // 重启主进程
                 $this->server->reload();
                 // 重新赋值
                 $this->md5File = $md5;
