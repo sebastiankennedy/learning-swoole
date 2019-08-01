@@ -29,8 +29,8 @@ class SingleWorker
             $buffer = fread($clientSocket, 65535);
 
             // 触发内度读取事件回调
-            if (! empty($buffer) && is_callable($this->onConnect)) {
-                call_user_func($this->onConnect, $clientSocket);
+            if (! empty($buffer) && is_callable($this->onMessage)) {
+                call_user_func($this->onMessage, $clientSocket);
             }
 
             // 关闭客户端连接
@@ -45,7 +45,7 @@ $worker = new SingleWorker('TCP', HOST, PORT);
 $worker->onConnect = function ($fd) {
     echo "客户端 " . $fd . '连接成功。' . PHP_EOL;
 };
-$worker->onConnect = function ($fd) {
+$worker->onMessage = function ($fd) {
     $content = 'Hello World';
     $httpResponse = "HTTP/1.1 200 OK\r\n";
     $httpResponse .= "Content-Type: text/html;charset=UTF-8\r\n";
