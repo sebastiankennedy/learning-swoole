@@ -19,6 +19,5 @@ if ($data) {
     echo $data . PHP_EOL;
 }
 
-
 // 关闭连接
 $client->close();
