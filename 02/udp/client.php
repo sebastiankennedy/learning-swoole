@@ -13,7 +13,7 @@ $client->sendto(IP_ADDRESS, PORT, 'Hello Server, I am a Udp Sync Client.') || ex
 // 接受消息
 $bool = true;
 while ($bool) {
-    usleep(1000);
+    sleep(1);
     $data = $client->recv(65535, Swoole\Client::MSG_WAITALL);
 
     if ($data) {
