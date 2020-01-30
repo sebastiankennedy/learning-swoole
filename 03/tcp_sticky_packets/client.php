@@ -15,5 +15,5 @@ for ($i = 0; $i < 20; $i++) {
 
 // 使用结束符一次性发送多条数据 - 约定结束符分割粘包
 for ($i = 0; $i < 20; $i++) {
-    $client->send('123456' . CUSTOM_EOF);
+    $client->send('Hello World' . CUSTOM_EOF);
 }
