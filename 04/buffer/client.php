@@ -28,6 +28,7 @@ go(
 
         // 一次性发送大量的数据
         $body = json_encode(str_repeat('a', 1024 * 1024 * 1));
+        // length 的值不包含包头，package_body_offset 设置为 4
         $data = pack('N', strlen($body)) . $body;
         $client->send($data);
 
