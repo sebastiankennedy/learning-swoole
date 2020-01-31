@@ -1,6 +1,6 @@
 <?php
 
 const HOST = '0.0.0.0';
-const PORT = 9501;
-const IP_ADDRESS = "118.126.101.144";
+const PORT = 0;
+const IP_ADDRESS = '';
 const CUSTOM_EOF = '\r\n';
