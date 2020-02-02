@@ -1,0 +1,16 @@
+{
+    "name": "sebastian/network_io_models",
+    "authors": [
+        {
+            "name": "sebastiankennedy",
+            "email": "sebastiankennedy@foxmail.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "NetworkIoModels\\": "./src/"
+        }
+    }
+}
