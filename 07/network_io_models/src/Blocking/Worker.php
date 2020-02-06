@@ -4,8 +4,6 @@ namespace NetworkIoModels\Blocking;
 
 /**
  * Class Worker
- *
- * @package Network\Blocking
  */
 class Worker
 {
@@ -58,7 +56,7 @@ class Worker
     {
         while (true) {
             // 阻塞监听客户端连接（blocking receive）
-            $client = @stream_socket_accept($this->socket);
+            $client = stream_socket_accept($this->socket);
 
             // 如果文件指针无效，将会导致 feof() 函数陷入无限循环当中
             if ($client) {
@@ -71,7 +69,7 @@ class Worker
                 $data = '';
                 while (!feof($client)) {
                     // 每次最多读取 1024 * 1024 * 2 个字节，即 2 M
-                    $stream = fread($client, 1024 * 1024 * 2);
+                    $stream = stream_socket_recvfrom($client, 1024 * 1024 * 2);
                     $data = $data . $stream;
 
                     // 回调服务端接受数据成功函数
@@ -86,7 +84,7 @@ class Worker
                 }
 
                 // 关闭客户端连接
-                fclose($client);
+                stream_socket_shutdown($client, STREAM_SHUT_RDWR);
             }
         }
     }
@@ -99,6 +97,6 @@ class Worker
      */
     public function send($client, $data)
     {
-        fwrite($client, $data);
+        stream_socket_sendto($client, $data);
     }
 }
