@@ -6,8 +6,6 @@ use Exception;
 
 /**
  * Class Worker - IO 多路复用
- *
- * @package NetworkIoModels\Multiplexing
  */
 class Worker
 {

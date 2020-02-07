@@ -4,8 +4,6 @@ namespace NetworkIoModels\NonBlocking;
 
 /**
  * Class Worker
- *
- * @package Network\Blocking
  */
 class Worker
 {

@@ -9,12 +9,12 @@ if ($client) {
     for ($i = 1; $i < 11; $i++) {
         // 非阻塞发送（non-blocking send）
         echo '开始发送数据' . date('H:i:s', time()) . PHP_EOL;
-        fwrite($client, 'Hello, Worker.This is the ' . $i . ' time.');
+        stream_socket_sendto($client, 'Hello, Worker.This is the ' . $i . ' time.');
         echo '结束发送数据' . date('H:i:s', time()) . PHP_EOL;
 
         // 阻塞读取（blocking receive）
         echo '开始读取数据' . date('H:i:s', time()) . PHP_EOL;
-        $stream = fread($client, 1024 * 1024 * 2);
+        $stream = stream_socket_recvfrom($client, 1024 * 1024 * 2);
         echo '结束读取数据' . date('H:i:s', time()) . PHP_EOL;
 
         $data = $data . $stream;
@@ -22,5 +22,5 @@ if ($client) {
         sleep(2);
     }
 
-    fclose($client);
+    stream_socket_shutdown($client, STREAM_SHUT_RDWR);
 }
